@@ -1,6 +1,71 @@
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 import { Icon, Label, NativeTabs } from "expo-router/build/native-tabs";
+import { Platform } from "react-native";
+import { useUserStore } from "../../../../store/userStore";
 
-export default function TabsLayout() {
+function AndroidTabs() {
+  const isAdmin = useUserStore((state) => state.isAdmin);
+
+  return (
+    <Tabs screenOptions={{ headerShown: false }}>
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="create"
+        options={{
+          title: "Add",
+          href: isAdmin ? undefined : null,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="saved"
+        options={{
+          title: "Saved",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="heart" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
+}
+
+function IOSTabs() {
+  const isAdmin = useUserStore((state) => state.isAdmin);
+
   return (
     <NativeTabs>
       <NativeTabs.Trigger name="index">
@@ -13,6 +78,12 @@ export default function TabsLayout() {
       </NativeTabs.Trigger>
 
       {/* Create property */}
+      {isAdmin && (
+        <NativeTabs.Trigger name="create">
+          <Icon sf="plus.circle.fill" />
+          <Label>Add Property</Label>
+        </NativeTabs.Trigger>
+      )}
 
       <NativeTabs.Trigger name="saved">
         <Icon sf="heart.fill" />
@@ -25,4 +96,8 @@ export default function TabsLayout() {
       </NativeTabs.Trigger>
     </NativeTabs>
   );
+}
+
+export default function TabsLayout() {
+  return Platform.OS === "android" ? <IOSTabs /> : <AndroidTabs />;
 }

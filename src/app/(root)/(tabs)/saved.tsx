@@ -5,7 +5,7 @@ export default function Saved() {
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <View>
-        <Text>HomeScreen</Text>
+        <Text>Saved</Text>
       </View>
     </SafeAreaView>
   );
