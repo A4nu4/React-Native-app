@@ -22,7 +22,11 @@ export default function FeaturedCard({ property }: { property: Property }) {
     >
       {/* Image */}
       <Image
-        source={{ uri: property.images[0] }}
+        source={
+          property.images.length > 0
+            ? property.images[0]
+            : require("../assets/images/kribb.png")
+        }
         className="w-full object-cover"
         style={{ height: 176 }}
       />

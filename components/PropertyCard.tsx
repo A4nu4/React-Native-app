@@ -32,7 +32,11 @@ export default function PropertyCard({
     >
       {/* Image */}
       <Image
-        source={{ uri: property.images[0] }}
+        source={
+          property.images.length > 0
+            ? property.images[0]
+            : require("../assets/images/kribb.png")
+        }
         className="object-cover"
         style={{ width: 112, height: 112 }}
       />
