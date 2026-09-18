@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useSavedProperty } from "../hooks/useSavedProperty";
 import { formatPrice } from "../lib/utils";
 import { Property } from "../types";
 
@@ -15,7 +16,10 @@ export default function PropertyCard({
 }) {
   const router = useRouter();
 
-  const isSaved = true;
+  const { isSaved, saveLoading, toggleSave } = useSavedProperty(
+    property.id,
+    onUnsave,
+  );
 
   return (
     <TouchableOpacity
@@ -88,7 +92,11 @@ export default function PropertyCard({
         </View>
       </View>
 
-      <TouchableOpacity className="w-10 items-center py-3">
+      <TouchableOpacity
+        onPress={toggleSave}
+        disabled={saveLoading}
+        className="w-10 items-center py-3"
+      >
         <Ionicons
           name={isSaved ? "heart" : "heart-outline"}
           size={18}
