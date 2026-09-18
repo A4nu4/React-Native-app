@@ -121,7 +121,10 @@ export default function HomeScreen() {
                   renderItem={({ item }) => <FeaturedCard property={item} />}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ paddingHorizontal: 20 }}
+                  contentContainerStyle={{
+                    paddingHorizontal: 20,
+                    gap: 10,
+                  }}
                 />
               )}
             </View>

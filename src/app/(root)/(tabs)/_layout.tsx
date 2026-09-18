@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { Icon, Label, NativeTabs } from "expo-router/build/native-tabs";
+import { NativeTabs } from "expo-router/build/native-tabs";
 import { Platform } from "react-native";
 import { useUserStore } from "../../../../store/userStore";
 
@@ -69,35 +69,36 @@ function IOSTabs() {
   return (
     <NativeTabs>
       <NativeTabs.Trigger name="index">
-        <Label>Home</Label>
-        <Icon sf="house.fill" />
+        <NativeTabs.Trigger.Icon sf="house.fill" />
+        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
+
       <NativeTabs.Trigger name="search">
-        <Icon sf="magnifyingglass" />
-        <Label>Search</Label>
+        <NativeTabs.Trigger.Icon sf="magnifyingglass" />
+        <NativeTabs.Trigger.Label>Search</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
 
       {/* Create property */}
       {isAdmin && (
         <NativeTabs.Trigger name="create">
-          <Icon sf="plus.circle.fill" />
-          <Label>Add Property</Label>
+          <NativeTabs.Trigger.Icon sf="plus.circle.fill" />
+          <NativeTabs.Trigger.Label>Add Property</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
       )}
 
       <NativeTabs.Trigger name="saved">
-        <Icon sf="heart.fill" />
-        <Label>Saved</Label>
+        <NativeTabs.Trigger.Icon sf="heart.fill" />
+        <NativeTabs.Trigger.Label>Saved</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="profile">
-        <Icon sf="person.fill" />
-        <Label>Profile</Label>
+        <NativeTabs.Trigger.Icon sf="person.fill" />
+        <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );
 }
 
 export default function TabsLayout() {
-  return Platform.OS === "android" ? <IOSTabs /> : <AndroidTabs />;
+  return Platform.OS === "ios" ? <IOSTabs /> : <AndroidTabs />;
 }
